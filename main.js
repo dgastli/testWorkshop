@@ -49817,7 +49817,7 @@ var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____C
     return total;
   }});
 
-  
+
 
 
   Object.defineProperty(Main.prototype,"evaluateInteraction",{writable:true,configurable:true,value:function(Interaction){"use strict";
@@ -49829,6 +49829,7 @@ var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____C
       this.setState({Interface:newModelInterface});
       this.setState({listOfAtoms:listOfAtoms});
       this.setState({errorInteraction:"",Interaction:Interaction});
+      this.setState({Interaction:Interaction});
       var compiled=iii.compiler.compileToIii(this.state.Interaction);
       this.setState({compiledInteraction:compiled});
       var compiledInter=document.getElementById("compiledI");
