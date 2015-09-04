@@ -49604,8 +49604,8 @@ module.exports.ScenarioInvalidException = ScenarioInvalidException;
 var React = require('react');
 var SkyLight = require('react-skylight');
 var iii = require('iii');
-var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){CodeEditor[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;CodeEditor.prototype=Object.create(____SuperProtoOf____Class1);CodeEditor.prototype.constructor=CodeEditor;CodeEditor.__superConstructor__=____Class1;function CodeEditor(props) {"use strict";
-    ____Class1.call(this,props);
+var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){CodeEditor[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;CodeEditor.prototype=Object.create(____SuperProtoOf____Class2);CodeEditor.prototype.constructor=CodeEditor;CodeEditor.__superConstructor__=____Class2;function CodeEditor(props) {"use strict";
+    ____Class2.call(this,props);
     this.state = {
       openedTab: 0
     };
@@ -49830,6 +49830,7 @@ var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____C
       this.setState({listOfAtoms:listOfAtoms});
       this.setState({errorInteraction:"",Interaction:Interaction});
       this.setState({Interaction:Interaction});
+      console.log(this.state.Interaction);
       var compiled=iii.compiler.compileToIii(this.state.Interaction);
       this.setState({compiledInteraction:compiled});
       var compiledInter=document.getElementById("compiledI");
@@ -50174,10 +50175,10 @@ function testxxxx(){
   console.log("bobobobbobobobobobobo");
 }
 
-var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){TraceViewer[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;TraceViewer.prototype=Object.create(____SuperProtoOf____Class2);TraceViewer.prototype.constructor=TraceViewer;TraceViewer.__superConstructor__=____Class2;
+var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____Class1.hasOwnProperty(____Class1____Key)){TraceViewer[____Class1____Key]=____Class1[____Class1____Key];}}var ____SuperProtoOf____Class1=____Class1===null?null:____Class1.prototype;TraceViewer.prototype=Object.create(____SuperProtoOf____Class1);TraceViewer.prototype.constructor=TraceViewer;TraceViewer.__superConstructor__=____Class1;
 
   function TraceViewer(props) {"use strict";
-    ____Class2.call(this,props);
+    ____Class1.call(this,props);
     this.state = {
       tableWidth: this.props.tableWidth,
       tableHeight: this.props.tableHeight,
