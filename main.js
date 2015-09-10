@@ -9167,7 +9167,7 @@ function expand(interactionDefinition) {
 
   var interactionsToExpandAlongWithTheirMatchingDefinition;
 
-  // do {
+  do {
     interactionsToExpandAlongWithTheirMatchingDefinition =
       _.filter(
         _.map(listNonBaseInteractions(interaction),
@@ -9185,7 +9185,7 @@ function expand(interactionDefinition) {
     _.forEach(interactionsToExpandAlongWithTheirMatchingDefinition, function(x) {
       interaction = instantiate(interaction, x.definition);
     });
-  // } while (interactionsToExpandAlongWithTheirMatchingDefinition.length > 0);
+  } while (interactionsToExpandAlongWithTheirMatchingDefinition.length > 0);
 
   return {
     type: "Definition",
@@ -20746,7 +20746,8 @@ module.exports={
     "tarball": "http://registry.npmjs.org/escodegen/-/escodegen-1.7.0.tgz"
   },
   "directories": {},
-  "_resolved": "https://registry.npmjs.org/escodegen/-/escodegen-1.7.0.tgz"
+  "_resolved": "https://registry.npmjs.org/escodegen/-/escodegen-1.7.0.tgz",
+  "readme": "ERROR: No README data found!"
 }
 
 },{}],92:[function(require,module,exports){
@@ -53492,19 +53493,6 @@ module.exports = require('./lib/React');
 
 },{"./lib/React":124,"_process":8,"buffer":2}],256:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
-function ScenarioInvalidException(message) {
-   this.message = message;
-   this.name = "ScenarioInvalidException";
-}
-
-module.exports.ScenarioInvalidException = ScenarioInvalidException;
-
-
-
-}).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src/ScenarioInvalidException.js","/src")
-
-},{"_process":8,"buffer":2}],257:[function(require,module,exports){
-(function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var React = require('react');
 var SkyLight = require('react-skylight');
 var iii = require('iii');
@@ -53537,15 +53525,11 @@ var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____C
   }});
 
 
-
   Object.defineProperty(CodeEditor.prototype,"componentDidMount",{writable:true,configurable:true,value:function() {"use strict";
-    this.props.evaluateInterface(this.props.Interface);
     this.props.evaluateScenario(this.props.scenario);
+    this.props.evaluateInteraction(this.props.Interaction);
   }});
 
-  Object.defineProperty(CodeEditor.prototype,"interfaceChanged",{writable:true,configurable:true,value:function(e) {"use strict";
-    this.props.onInterfaceChange(e.target.value);
-  }});
 
   Object.defineProperty(CodeEditor.prototype,"scenarioChanged",{writable:true,configurable:true,value:function(e) {"use strict";
     this.props.onScenarioChange(e.target.value);
@@ -53555,14 +53539,7 @@ var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____C
   }});
 
 
-
-  Object.defineProperty(CodeEditor.prototype,"showCompiledMode",{writable:true,configurable:true,value:function() {"use strict";
-    this.refs.CompiledMode.show();
-  }});
-
-
   Object.defineProperty(CodeEditor.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
-    //var compiledInteraction = iii.compiler.compileToIii(this.props.Interaction);
     return (
       React.createElement("div", {className: "CodeEditor"}, 
         React.createElement("div", {className: "Tabs"}, 
@@ -53579,7 +53556,7 @@ var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____C
           React.createElement("div", {className: this.state.openedTab === 2
             ? 'Tab active'
             : 'Tab', onClick: this.openTab2.bind(this)}, 
-            React.createElement("span", null, "Compiled interaction")
+            React.createElement("span", null, "Analyse")
           )
         ), 
         React.createElement("div", {className: "TabContent"}, 
@@ -53592,15 +53569,6 @@ var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____C
               : 'none'
           }}), 
 
-
-          React.createElement("textarea", {disabled: true, id: "errorS", className: "errorScenario", defaultValue: this.props.errorScenario, name: "errorScenario", style: {
-            display: this.props.errorScenario !== "" && this.state.openedTab === 0
-              ? 'inline'
-              : 'none'
-          }}), 
-
-
-          React.createElement("div", null, 
             React.createElement("textarea", {className: this.props.errorInteraction !== ""
               ? "error"
               : "", defaultValue: this.props.Interaction, name: "interaction", onChange: this.interactionChanged.bind(this), style: {
@@ -53609,27 +53577,63 @@ var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____C
                 : 'none'
             }}), 
 
-            React.createElement("textarea", {disabled: true, id: "errorI", className: "errorScenario", defaultValue: this.props.errorInteraction, name: "errorInteraction", style: {
-              display: this.props.errorInteraction !== "" && this.state.openedTab === 1
-                ? 'inline'
-                : 'none'
-            }}), 
-            React.createElement("textarea", {disabled: true, id: "compiledI", defaultValue: this.props.compiledInteraction, name: "compiledInteraction", style: {
-              display: this.state.openedTab === 2
-                ? 'inline'
-                : 'none'
-            }}), 
 
+            React.createElement("div", {className: "Tab compiledInteraction", style: {
+              display: this.state.openedTab === 2
+                ? 'inline-block'
+                : 'none'
+            }}, this.props.compiledInteraction), 
+
+            React.createElement("div", {className: "errorScenario", style: {
+              display: this.props.errorInteraction !== "" && this.state.openedTab === 1
+                ? 'inline-block'
+                : 'none'
+            }}, this.props.errorInteraction), 
+
+            React.createElement("div", {className: "errorScenario", style: {
+              display: this.props.errorScenario !== "" && this.state.openedTab === 0
+                ? 'inline-block'
+                : 'none'
+            }}, this.props.errorScenario), 
 
             React.createElement("p", {style: {
               display: this.state.openedTab === 2
                 ? 'inline'
                 : 'none'
-            }}, " ",  "Number of previous :" + this.props.stats.previous, " ")
-
+            }},  "Number of previous :" + this.props.stats.previous, " "), 
+            React.createElement("br", null), 
+            React.createElement("br", null), 
+            React.createElement("p", {style: {
+              display: this.state.openedTab === 2
+                ? 'inline'
+                : 'none'
+            }}, " ",  "Number of identifiers :" + this.props.stats.identifiers, " "), 
+            React.createElement("br", null), 
+            React.createElement("br", null), 
+            React.createElement("p", {style: {
+              display: this.state.openedTab === 2
+                ? 'inline'
+                : 'none'
+            }}, " ",  "Number of functions :" + this.props.stats.functions, " "), 
+            React.createElement("br", null), 
+            React.createElement("br", null), 
+            React.createElement("p", {style: {
+              display: this.state.openedTab === 2
+                ? 'inline'
+                : 'none'
+            }}, " ",  "Number of compositions :" + this.props.stats.compositions, " "), 
+            React.createElement("br", null), 
+            React.createElement("br", null), 
+            React.createElement("p", {style: {
+              display: this.state.openedTab === 2
+                ? 'inline'
+                : 'none'
+            }}, " ",  "Number of variables :" + (this.props.stats.identifiers+this.props.stats.previous), " "), 
+            React.createElement("br", null), 
+            React.createElement("br", null)
           )
         )
-      )
+
     );
   }});
 
@@ -53637,9 +53641,7 @@ var ____Class1=React.Component;for(var ____Class1____Key in ____Class1){if(____C
 CodeEditor.propTypes = {
   stats: React.PropTypes.object,
   errorInteraction: React.PropTypes.string,
-  errorInterface: React.PropTypes.string,
   errorScenario: React.PropTypes.string,
-  Interface: React.PropTypes.string,
   Interaction: React.PropTypes.string,
   compiledInteraction:React.PropTypes.string,
 
@@ -53648,10 +53650,8 @@ CodeEditor.propTypes = {
 CodeEditor.defaultProps = {
   stats: {variables:0,previous:0,identifiers:0,functions:0,compositions:0},
   errorInteraction: "",
-  errorInterface: "",
   errorScenario: "",
-  Interface: "{a:{e:Number in},b:{c:{d:Number in}}}",
-  Interaction: "interaction (test):Number out with interaction (a):Number out is (previous(#a)) is ({x:(a),y:(#a),z:(#b)})",
+  Interaction: "interaction (test):{a:{e:Number in},b:{c:{d:Number in}}} with interaction (a):Number out is (previous(#a)) is ({x:(a),y:(#a),z:(#b)})",
   scenario: '[{"a":{"e":2},"b":{"c":{"d":5}}},{"a":{"e":1}},{"a":{"e":0},"b":{"c":{"d":-5}}},{},{"b":{"c":{"d":10}}}]',
   compiledInteraction:"({x:(previous(#0)),y:(#0),z:(#1)})",
 
@@ -53663,30 +53663,57 @@ module.exports = CodeEditor;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src/codeEditor.jsx","/src")
 
-},{"_process":8,"buffer":2,"iii":70,"react":255,"react-skylight":94}],258:[function(require,module,exports){
+},{"_process":8,"buffer":2,"iii":70,"react":255,"react-skylight":94}],257:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var React = require('react');
 var CodeEditor = require('./codeEditor.jsx');
 var TraceViewer = require('./traceViewer.jsx');
 var iii = require('iii');
 var scenarioChecker = require('./scenario.js');
-var scenarioInvalidException = require('./ScenarioInvalidException.js');
 var _ = require('lodash');
+var rowNumber=5;
 
 function nbrOfPrevious(interaction) {
-
   var total = 0;
-  // console.log("hi", newInteraction[0].interaction.operand.length);
-  // var length = interaction.operand.length;
   _.forEach(interaction.operand, function(x) {
-    // console.log("foreach");
     total += nbrOfPrevious(x);
     if (iii.operator.parse(interaction.operator) === "Previous") {
-      // console.log("ok");
       total++;
     }
   });
-  // console.log("total =", total);
+  return total;
+}
+
+function nbrOfIdentifiers(interaction) {
+  var total = 0;
+  _.forEach(interaction.operand, function(x) {
+    total += nbrOfIdentifiers(x);
+    if (iii.operator.parse(interaction.operator) === "Identifier") {
+      total++;
+    }
+  });
+  return total;
+}
+
+function nbrOfFunctions(interaction) {
+  var total = 0;
+  _.forEach(interaction.operand, function(x) {
+    total += nbrOfFunctions(x);
+    if (iii.operator.parse(interaction.operator) === "Function") {
+      total++;
+    }
+  });
+  return total;
+}
+
+function nbrOfCompositions(interaction) {
+  var total = 0;
+  _.forEach(interaction.operand, function(x) {
+    total += nbrOfCompositions(x);
+    if (iii.operator.parse(interaction.operator) === "Composition") {
+      total++;
+    }
+  });
   return total;
 }
 
@@ -53694,13 +53721,12 @@ var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____C
     ____Class0.call(this,props);
     this.state = {
       listOfAtoms: [],
-      errorInterface: "",
       errorInteraction: "",
       errorScenario: "",
-      Interface: "{a:{e:Number in},b:{c:{d:Number in}}}",
-      Interaction: "interaction (test):Number out with interaction (a):Number out is (previous(#a)) is ({x:(a),y:(#a),z:(#b)})",
+      Interaction: "interaction (test):{a:{e:Number in},b:{c:{d:Number in}}} with interaction (a):Number out is (previous(#a)) is ({x:(a),y:(#a),z:(#b)})",
       scenario: '[{"a":{"e":2},"b":{"c":{"d":5}}},{"a":{"e":1}},{"a":{"e":0},"b":{"c":{"d":-5}}},{},{"b":{"c":{"d":10}}}]',
       compiledInteraction: "({x:(previous(#0)),y:(#0),z:(#1)})",
+      tableRowNumber:5,
       stats: {
         variables: 0,
         previous: 0,
@@ -53711,10 +53737,6 @@ var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____C
     };
   }
 
-  Object.defineProperty(Main.prototype,"onInterfaceChange",{writable:true,configurable:true,value:function(newInterface) {"use strict";
-    this.evaluateInterface(newInterface);
-  }});
-
   Object.defineProperty(Main.prototype,"onInteractionChange",{writable:true,configurable:true,value:function(newInteraction) {"use strict";
     this.evaluateInteraction(newInteraction);
   }});
@@ -53722,40 +53744,13 @@ var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____C
   Object.defineProperty(Main.prototype,"onScenarioChange",{writable:true,configurable:true,value:function(newScenario) {"use strict";
     this.evaluateScenario(newScenario);
   }});
-/*
-  nbrOfPrevious(newInteraction){
-    var total=0;
-    console.log("hi",newInteraction[0].interaction.operand.length);
-    var length=newInteraction[0].interaction.operand.length;
-    _.forEach(newInteraction[0].interaction.operand,function(x){
-      console.log("foreach");
-      console.log(x);
-      total+= nbrOfPrevious(x);
-      if(iii.operator.parse(newInteraction[0].interaction.operator)==="previous"){
-        console.log("ok");
-        total++;
-      }
-    });
-    console.log("total =",total);
-    return total;
-  }
-
-
-*/
-
 
 
   Object.defineProperty(Main.prototype,"evaluateInteraction",{writable:true,configurable:true,value:function(Interaction) {"use strict";
     try {
       var newModelDefinitions = iii.parser.parse(Interaction);
       var newModelInterface = newModelDefinitions[0].signature.interface;
-      this.setState({
-        errorInterface: ""
-      });
       var listOfAtoms = iii.interfaces.listOfAtoms(newModelInterface, "main");
-      this.setState({
-        Interface: newModelInterface
-      });
       this.setState({
         listOfAtoms: listOfAtoms
       });
@@ -53764,26 +53759,9 @@ var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____C
         Interaction: Interaction
       });
       var compiled = iii.compiler.compileToIii(Interaction);
-
       this.setState({
         compiledInteraction: compiled
       });
-      var compiledInter = document.getElementById("compiledI");
-      compiledInter.value = compiled;
-
-// TODO
-// var elemI=document.getElementById("errorI");
-// elemI.value="";
-// console.log(this.nbrOfPrevious(newModelInteraction));
-// console.log("dorrra");
-// var nbrPrevious=this.nbrOfPrevious(newModelInteraction);
-//
-// // TODO corriger
-// // Ce n'est pas très "react" comme façon de faire !
-// var nbrPrev=document.getElementById("nbrPrevious");
-//
-// nbrPrev.value="Number of previous : "+nbrPrevious;
-// console.log("doa");
       this.setState({
         Interaction: Interaction,
         stats: {
@@ -53793,89 +53771,38 @@ var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____C
           functions: 0,
           compositions:0
         }
-
       });
-
-// =======
-//       var elemI=document.getElementById("errorI");
-//       elemI.value="";
-//       console.log("dorrra");
-//
-//       console.log("length  ",newModelInteraction.length);
-//
-//       _.forEach(newModelInteraction,function(x){
-//         console.log("cccccc");
-//         nbrPrevious+=this.nbrOfPrevious(x.interaction);
-//         console.log("sadok");
-//       }.bind(this));
-//
-//       //var nbrPrevious=this.nbrOfPrevious(newModelInteraction[0].interaction);
-//       var nbrPrev=document.getElementById("nbrPrevious");
-//       nbrPrev.value="Number of previous : "+nbrPrevious;
-//       console.log("doa");
-
     } catch (errorMessage) {
       this.setState({
-        errorInteraction: JSON.stringify(errorMessage)
+        errorInteraction: ""+errorMessage
       });
-      var compiledInter = document.getElementById("compiledI");
-      compiledInter.value = errorMessage;
       console.log(errorMessage);
-      var elemI = document.getElementById("errorI");
-      elemI.value = errorMessage;
     }
 
-  }});
-
-  Object.defineProperty(Main.prototype,"evaluateInterface",{writable:true,configurable:true,value:function(Interface) {"use strict";
-    try {
-      var newModelInterface = iii.parser.parse(Interface, {
-        startRule: "interface"
-      });
-      this.setState({
-        errorInterface: ""
-      });
-      var listOfAtoms = iii.interfaces.listOfAtoms(newModelInterface, "main");
-      this.setState({
-        Interface: newModelInterface
-      });
-      this.setState({
-        listOfAtoms: listOfAtoms
-      });
-    } catch (errorMessage) {
-      this.setState({
-        errorInterface: errorMessage
-      });
-
-    }
   }});
 
   Object.defineProperty(Main.prototype,"evaluateScenario",{writable:true,configurable:true,value:function(scenario) {"use strict";
-/* TODO meme esprit que evaluateCode */
-
     try {
       var newModelScenario = JSON.parse(scenario);
       this.setState({
         scenario: newModelScenario
       });
-// var listOfValues=scenarioChecker.check(this.state.modelCode,newModelScenario,"main");
-// console.log("resultat =",JSON.stringify(listOfValues));
-      this.setState({
-        errorScenario: ""
-      });
-// this.setState({listOfValues:listOfValues});
-// enlever les models
-      var elem = document.getElementById("errorS");
-      elem.value = "";
 
+      this.setState({
+        errorScenario: "",
+      });
+      rowNumber=newModelScenario.length;
+      console.log("ee",this.state.scenario);
+      this.setState({
+        tableRowNumber: rowNumber
+      });
     } catch (errorMessage) {
 
       this.setState({
-        errorScenario: errorMessage
+        errorScenario: ""+errorMessage
+
       });
-      var elem = document.getElementById("errorS");
-      elem.value = errorMessage;
-      console.log("erreur main", this.state.errorScenario);
+
 
     }
   }});
@@ -53884,13 +53811,37 @@ var ____Class0=React.Component;for(var ____Class0____Key in ____Class0){if(____C
     return iii.interfaces.listOfAtoms(newModel, "main");
   }});
 
+
+
+  Object.defineProperty(Main.prototype,"backward",{writable:true,configurable:true,value:function(){"use strict";
+      if(rowNumber>0){
+        rowNumber=rowNumber-1;
+      }
+      this.setState({tableRowNumber:rowNumber});
+  }});
+
+  Object.defineProperty(Main.prototype,"forward",{writable:true,configurable:true,value:function(){"use strict";
+      if(rowNumber<this.state.scenario.length){
+        rowNumber=rowNumber+1;
+      }
+      this.setState({tableRowNumber:rowNumber});
+
+  }});
+  Object.defineProperty(Main.prototype,"fastBackward",{writable:true,configurable:true,value:function(){"use strict";
+      rowNumber=0;
+      this.setState({tableRowNumber:rowNumber});
+  }});
+  Object.defineProperty(Main.prototype,"fastForward",{writable:true,configurable:true,value:function(){"use strict";
+      rowNumber=this.state.scenario.length;
+      this.setState({tableRowNumber:rowNumber});
+    }});
+
   Object.defineProperty(Main.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
     return (
       React.createElement("div", {className: "Main"}, 
-        React.createElement(CodeEditor, {Interaction: this.state.Interaction, Interface: this.state.Interface, errorInteraction: this.state.errorInteraction, errorInterface: this.state.errorInterface, errorScenario: this.state.errorScenario, evaluateInterface: this.evaluateInterface.bind(this), evaluateScenario: this.evaluateScenario.bind(this), onInteractionChange: this.onInteractionChange.bind(this), onInterfaceChange: this.onInterfaceChange.bind(this), onScenarioChange: this.onScenarioChange.bind(this), scenario: this.state.scenario, 
-        stats: this.state.stats}), 
-        React.createElement(TraceViewer, {listOfAtoms: this.state.listOfAtoms, scenario: this.state.scenario}), 
-        "/* TODO on doit aussi passer le scenario en prop */"
+        React.createElement(CodeEditor, {Interaction: this.state.Interaction, errorInteraction: this.state.errorInteraction, errorScenario: this.state.errorScenario, evaluateInteraction: this.evaluateInteraction.bind(this), evaluateScenario: this.evaluateScenario.bind(this), onInteractionChange: this.onInteractionChange.bind(this), onScenarioChange: this.onScenarioChange.bind(this), scenario: this.state.scenario, 
+        stats: this.state.stats, compiledInteraction: this.state.compiledInteraction}), 
+        React.createElement(TraceViewer, {listOfAtoms: this.state.listOfAtoms, scenario: this.state.scenario, tableRowNumber: this.state.tableRowNumber, fastForward: this.fastForward.bind(this), fastBackward: this.fastBackward.bind(this), backward: this.backward.bind(this), forward: this.forward.bind(this)})
       )
     );
   }});
@@ -53902,186 +53853,14 @@ React.render(React.createElement(Main, null), document.getElementById("main"));
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src/main.jsx","/src")
 
-},{"./ScenarioInvalidException.js":256,"./codeEditor.jsx":257,"./scenario.js":259,"./traceViewer.jsx":260,"_process":8,"buffer":2,"iii":70,"lodash":93,"react":255}],259:[function(require,module,exports){
+},{"./codeEditor.jsx":256,"./scenario.js":258,"./traceViewer.jsx":259,"_process":8,"buffer":2,"iii":70,"lodash":93,"react":255}],258:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var _ = require('lodash');
 var iii = require('iii');
-// var scenarioInvalidException=require('./ScenarioInvalidException.js');
-
-/*
-TODO
-Fonction qui verifie que un scenario est valide par rapport a une list
-*/
-// function check(modelCode, scenario, prefix) {
-//   test=true;
-//   var listOfAtoms=iii.interfaces.listOfAtoms(modelCode,"main");
-//   res=[];
-//   for( var i=0;i<listOfAtoms.length;i++){
-//     if(listOfAtoms[i].direction=='in'){
-//       res[listOfAtoms[i].name]=listOfAtoms[i].data.name;
-//     }
-//   }
-//
-//   key=_.keys(res);
-//   values= _.values(res);
-//   values=_.map(values, function(n) { return n.toLowerCase(); });
-//
-//   var tableau=[];
-//   var compteur=0;
-//  for( var i=0;i<scenario.length;i++){
-//    var tabValeurs=[];
-//   scenarioVar =_.keys(scenario[i]);
-//   //console.log("scenarioVar ", scenarioVar);
-//   scenarioVar=_.map(scenarioVar, function(n) { return prefix+"."+ n; });
-//    //console.log("keys = ",scenarioVar);
-//    scenarioVal=_.values(scenario[i]);
-//    //console.log("scenarioVal ", scenarioVal);
-//    //console.log("scenarioVar.length ", scenarioVar.length);
-//    for(var j=0;j<scenarioVal.length;j++){
-//      //console.log("rentrer dans la boucle for");
-//      listOfAtomicInterfaces(scenarioVal[j],scenarioVar, prefix,j,tabValeurs);
-//
-//
-//   }
-//   //console.log(scenarioVar);
-//   //console.log(tabValeurs);
-//   resultat=[];
-//
-//   for( k=resultat.length; k<tabValeurs.length;k++){
-//     //console.log(scenarioVar[k]);
-//     //console.log(tabValeurs[k]);
-//   //  resultat[scenarioVar[k]]=tabValeurs[k];
-//   resultat.push({"key":scenarioVar[k],"value":tabValeurs[k]});
-//   }
-//   //console.log("resultat ",JSON.stringify(resultat));
-//
-//
-//
-//   var filtered =_.filter(scenarioVar, function(item) {
-//     return _.contains(key, item);
-//   });
-//   var difference=_.difference(scenarioVar, filtered);
-//   if(difference.length!=0){
-//     test=false;
-//  }
-// tableau[compteur]=resultat;
-// compteur++;
-// //tableau=tableau.concat(resultat);
-// //console.log("tableau ",JSON.stringify(tableau));
-// };
-//
-//   if (test==false){
-//     throw new Error("Invalid Scenario");
-//   }
-//
-//   return tableau;
-// }
-//
-//
-//
-// function listOfAtomicInterfaces(scenarioVal,scenarioVar, prefix,indice,tabValeurs) {
-//   //console.log("prefix ", prefix);
-//   //console.log("scenarioVar.length", scenarioVar);
-//   var tailleScenarioVar=scenarioVar.length;
-//   switch (typeof scenarioVal) {
-//
-//     case "object":
-//       //console.log("cas objet");
-//       var key = _.keys(scenarioVal);
-//         //console.log("key ",key);
-//       var value=_.values(scenarioVal);
-//         //console.log("value ", value);
-//         //console.log("indice ",indice);
-//       prefix=scenarioVar[indice]    ;  //scenariovar est une seule case
-//         //console.log("nouveau prefix ", prefix);
-//       key=_.map(key, function(n) { return prefix+"."+ n; });  //main.a.c
-//       //console.log("nouveau key ", key);
-//       scenarioVar[indice]=key[0];
-//       //console.log("scenarioVar.length", scenarioVar.length);
-//       //console.log("nouveauo scenarioVar ", scenarioVar);
-//       scenarioVal=value[0];
-//       //console.log("nouveau scenarioVal", scenarioVal);
-//       listOfAtomicInterfaces(scenarioVal,scenarioVar, prefix,indice,tabValeurs);
-//       return {scenarioVar,scenarioVal};
-//
-//        break;
-//     default:
-//     //console.log("cas simple");
-//     //console.log("nouveau scenarioVal", scenarioVal);
-//     tabValeurs[indice]=scenarioVal;
-//       return scenarioVar;
-//       break;
-//   }
-// }
-
-
-
 
 function flattenElement(element, prefix) {
   if (element !== null && typeof element === 'object') {
-    //
-    //    var temp= element;
-    //
-    //    // {a:{e:2},b:{c:{d:5}}}
-    //    console.log(prefix + ": 1 :    " +JSON.stringify(temp));
-    //
-    //    temp = _.mapKeys(temp,function(value,key){
-    //      return prefix+"."+key;
-    //    });
-    //
-    //
-    //
-    //
-    //
-    //
-    //    // {"main.a":{e:2},"main.b":{c:{d:5}}}
-    //    console.log(prefix + ": 2 :    " +JSON.stringify(temp));
-    //
-    //    //
-    //    // temp = _.mapValues(temp,function(value,key){
-    //    //   if(element !== null && typeof element === 'object') {
-    //    //   return flattenElement(value,key);
-    //    // }else {
-    //    //   return value;
-    //    // }
-    //    // });
-    //
-    //    temp = _.flatten(_.map(temp,flattenElement));
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //    // // {"main.a":{"main.a.e":2},"main.b":{"main.b.c.d":5}}
-    //    // console.log(prefix + ": 3 :    " +JSON.stringify(temp));
-    //    //
-    //    // temp = _.reduce(temp,function(tableau,element){
-    //    //   // console.log(_.union(tableau,[element]));
-    //    //   return _.union(tableau,[element]);
-    //    // },[]);
-    //
-    //
-    //
-    //
-    //
-    //
-    // // [{"main.a.e":2},{"main.b.c.d":5}];
-    // console.log(prefix + ": 4 :    " +JSON.stringify(temp));
-    //
-    //
-    //
-    //    temp = _.merge.apply(this,  temp);
-    //
-    //    // temp = _.merge(temp);
-    //
-    //
-    //    // {"main.a.e":2,"main.b.c.d":5}
-    //    console.log(prefix + ": 5 :    " +JSON.stringify(temp));
-    //
-    //
-    //    return temp;
+
 
     return _.merge.apply(this, _.flatten(_.map(_.mapKeys(element, function(value, key) {
       return prefix + "." + key;
@@ -54094,33 +53873,9 @@ function flattenElement(element, prefix) {
   }
 }
 
-
-// min(2,3,4,5)
-//
-// min([2,3,4,5])
-// var x = [2,3,4,5];
-// min(x);
-//
-// min.apply(this,[2,3,4,5]);
-
-
-
-// theInterface     :    LIDL interface
-// element          :    Scenario element       (ex   {a:{e:2},b:{c:{d:5}}}  )
-// prefix           :    String (ex "main")
-// return           :    Boolean
 function checkElement(theInterface,element, prefix){
   listOfNamesOfInputAtoms =  _.map(iii.interfaces.listOfAtoms(iii.interfaces.receptionInterface(theInterface),prefix),"name");
-// console.log(JSON.stringify(iii.interfaces.receptionInterface(theInterface)));
-
-// console.log(JSON.stringify(theInterface));
-// console.log(JSON.stringify(theInterface));
-// console.log(JSON.stringify(prefix));
-// console.log(iii.interfaces.listOfAtoms(theInterface,prefix));
-
-  // listOfNamesOfInputAtoms =  _.map(_.filter(iii.interfaces.listOfAtoms(theInterface,prefix),"direction","in")  ,"name");
   listOfElementKeys = _.keys(flattenElement(element,prefix));
-  // console.log(JSON.stringify(listOfElementKeys) + " " + JSON.stringify(listOfNamesOfInputAtoms) );
   return _.every(listOfElementKeys,function(x){return _.includes(listOfNamesOfInputAtoms,x);});
 }
 
@@ -54138,29 +53893,17 @@ module.exports.flattenElement = flattenElement;
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src/scenario.js","/src")
 
-},{"_process":8,"buffer":2,"iii":70,"lodash":93}],260:[function(require,module,exports){
+},{"_process":8,"buffer":2,"iii":70,"lodash":93}],259:[function(require,module,exports){
 (function (process,global,Buffer,__argument0,__argument1,__argument2,__argument3,__filename,__dirname){
 var React = require('react');
 var FixedDataTable = require('fixed-data-table');
-
-
 var _ = require('lodash');
-var ROWS = 1000000;
-
 var Column = FixedDataTable.Column;
-
 var ColumnGroup = FixedDataTable.ColumnGroup;
-var PropTypes = React.PropTypes;
 var Table = FixedDataTable.Table;
-var rowNumber=0;
-// var FakerDataList = require('./FakerDataList.js');
-
+var rowNumber=5;
 var scenarioUtils=require('./scenario.js');
 
-//console.log("length ",scenarioLength);
-function testxxxx(){
-  console.log("bobobobbobobobobobobo");
-}
 
 var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){TraceViewer[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;TraceViewer.prototype=Object.create(____SuperProtoOf____Class2);TraceViewer.prototype.constructor=TraceViewer;TraceViewer.__superConstructor__=____Class2;
 
@@ -54169,11 +53912,8 @@ var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____C
     this.state = {
       tableWidth: this.props.tableWidth,
       tableHeight: this.props.tableHeight,
-      tableRowNumber:0
+      openedTab: 0
     };
-// this.state = {
-//   dataList: this._dataListGetter()
-// }; // probleme this.props.listOfValues pas définit
 
   }
 
@@ -54189,6 +53929,20 @@ var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____C
     }
   }});
 
+
+  Object.defineProperty(TraceViewer.prototype,"openTab0",{writable:true,configurable:true,value:function(e) {"use strict";
+    this.setState({
+      openedTab: 0
+    });
+
+  }});
+
+  Object.defineProperty(TraceViewer.prototype,"openTab1",{writable:true,configurable:true,value:function(e) {"use strict";
+    this.setState({
+      openedTab: 1
+    });
+  }});
+
   Object.defineProperty(TraceViewer.prototype,"$TraceViewer_onResize",{writable:true,configurable:true,value:function() {"use strict";
     clearTimeout(this.$TraceViewer_updateTimer);
     this.$TraceViewer_updateTimer = setTimeout(this.$TraceViewer_updateSize.bind(this), 16);
@@ -54202,103 +53956,6 @@ var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____C
     });
   }});
 
-
-
-
-//   _dataListGetter() {
-//
-//     var listOfAtoms = [
-//       {
-//         "name": "main.a.e",
-//         "data": {
-//           "type": "DataAtomic",
-//           "name": "Number"
-//         },
-//         "direction": "in"
-//       }, {
-//         "name": "main.b.c.d",
-//         "data": {
-//           "type": "DataAtomic",
-//           "name": "Number"
-//         },
-//         "direction": "in"
-//       }
-//     ];
-//     var listOfValues = [
-//       [
-//         {
-//           "key": "main.a.e",
-//           "value": 2
-//         }, {
-//           "key": "main.b.c.d",
-//           "value": 5
-//         }
-//       ], [
-//         {
-//           "key": "main.a.e",
-//           "value": 1
-//         }
-//       ], [
-//         {
-//           "key": "main.a.e",
-//           "value": 0
-//         }, {
-//           "key": "main.b.c.d",
-//           "value": -5
-//         }
-//       ], [], [
-//         {
-//           "key": "main.b.c.d",
-//           "value": 10
-//         }
-//       ]
-//     ];
-//     var res = [];
-//
-//     for (var i = 0; i < listOfValues.length; i++) {
-//       var ligne = [];
-// //console.log("i ", i);
-//       if (listOfValues[i].length == 0) {
-//         for (var j = 0; j < listOfAtoms.length; j++) {
-//           ligne[j] = '-';
-//         }
-//       } else {
-//         for (var j = 0; j < listOfAtoms.length; j++) {
-//
-//           var k = 0;
-// //console.log("j =",j);
-// //console.log("listOfAtoms[j].name ",listOfAtoms[j].name);
-// //console.log("listOfValues[i][k].key ",listOfValues[i][k].key);
-// //console.log("taille de listOfValues[i].length =",listOfValues[i].length);
-//
-//           while (((listOfValues[i][k].key) != listOfAtoms[j].name) && (k < listOfValues[i].length)) {
-// //console.log("k= ",k);
-// //console.log("slama2 =",listOfValues[i][k].key);
-//             k++;
-// //console.log("k2 =",k);
-//             if (k == listOfValues[i].length) {
-//               break;
-//             }
-//           }
-//
-//           if (k < listOfValues[i].length) {
-// //console.log("slama =",listOfValues[i][k].key);
-//             ligne[j] = listOfValues[i][k].value;
-// //console.log("ligne ",ligne) ;//
-//
-//           } else {
-//             ligne[j] = '-';
-//           }
-//         }
-//       }
-//       res[res.length] = ligne;
-// //console.log("resultat final =",JSON.stringify(res));
-//
-//     }
-//     console.log ("dataList", JSON.stringify(res));
-//     return res;
-//   }
-
   Object.defineProperty(TraceViewer.prototype,"$TraceViewer_rowGetter",{writable:true,configurable:true,value:function(index) {"use strict";
     var prefix = "main";
     var row = this.props.scenario[index];
@@ -54306,46 +53963,64 @@ var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____C
   }});
 
 
-Object.defineProperty(TraceViewer.prototype,"backward",{writable:true,configurable:true,value:function(){"use strict";
-    if(rowNumber>0){
-      rowNumber=rowNumber-1;
-    }
-    this.setState({tableRowNumber:rowNumber});
-}});
-
-Object.defineProperty(TraceViewer.prototype,"forward",{writable:true,configurable:true,value:function(){"use strict";
-    if(rowNumber<this.props.scenario.length){
-      rowNumber=rowNumber+1;
-    }
-    this.setState({tableRowNumber:rowNumber});
-
-}});
-Object.defineProperty(TraceViewer.prototype,"fastBackward",{writable:true,configurable:true,value:function(){"use strict";
-    rowNumber=0;
-    this.setState({tableRowNumber:rowNumber});
-}});
-Object.defineProperty(TraceViewer.prototype,"fastForward",{writable:true,configurable:true,value:function(){"use strict";
-    rowNumber=this.props.scenario.length;
-    this.setState({tableRowNumber:rowNumber});
-  }});
-
 
 
   Object.defineProperty(TraceViewer.prototype,"render",{writable:true,configurable:true,value:function() {"use strict";
 
     var controlledScrolling = this.props.left !== undefined || this.props.top !== undefined;
-
     var listOfAtoms = this.props.listOfAtoms;
-
+    var espace="         ";
     return (
       React.createElement("div", {className: "TraceViewer"}, 
-        React.createElement("div", {className: "icons"}, 
-          React.createElement("i", {className: "fa fa-fast-backward", onClick: this.fastBackward.bind(this)}), 
-          React.createElement("i", {className: "fa fa-backward", onClick: this.backward.bind(this)}), 
-          React.createElement("i", {className: "fa fa-forward", onClick: this.forward.bind(this)}), 
-          React.createElement("i", {className: "fa fa-fast-forward", onClick: this.fastForward.bind(this)})
+        React.createElement("div", {className: "Tabs"}, 
+        React.createElement("div", {className: this.state.openedTab === 0
+          ? 'TabTraceViewer active'
+          : 'TabTraceViewer', onClick: this.openTab0.bind(this)}, 
+          React.createElement("span", null, " Variables Table ")
         ), 
-        React.createElement(Table, {groupHeaderHeight: 30, headerHeight: 30, height: this.state.tableHeight, width: this.state.tableWidth, overflowX: controlledScrolling ? "hidden" : "auto", overflowY: controlledScrolling ? "hidden" : "auto", rowGetter: this.$TraceViewer_rowGetter.bind(this), rowHeight: 30, rowsCount: this.state.tableRowNumber, scrollLeft: this.props.left, scrollTop: this.props.top}, 
+        React.createElement("div", {className: this.state.openedTab === 1
+            ? 'TabTraceViewer active'
+            : 'TabTraceViewer', onClick: this.openTab1.bind(this)}, 
+            React.createElement("span", null, "Canvas")
+        )
+        ), 
+
+        React.createElement("div", {className: "TabContentTraceViewer"}, 
+        React.createElement("br", null), 
+        React.createElement("div", {className: "icons", style: {
+        display: this.state.openedTab === 0
+          ? 'inline'
+          : 'none'
+      }}, 
+          React.createElement("i", {className: "fa fa-fast-backward fa-3x", onClick: this.props.fastBackward, style: {
+          display: this.state.openedTab === 0
+            ? 'inline'
+            : 'none'
+        }}, espace), 
+          React.createElement("i", {className: "fa fa-backward fa-3x", onClick: this.props.backward, style: {
+          display: this.state.openedTab === 0
+            ? 'inline'
+            : 'none'
+        }}, espace), 
+          React.createElement("i", {className: "fa fa-forward fa-3x", onClick: this.props.forward, style: {
+          display: this.state.openedTab === 0
+            ? 'inline'
+            : 'none'
+        }}, espace), 
+          React.createElement("i", {className: "fa fa-fast-forward fa-3x", onClick: this.props.fastForward, style: {
+          display: this.state.openedTab === 0
+            ? 'inline'
+            : 'none'
+        }}, espace)
+        ), 
+        React.createElement("br", null), 
+        React.createElement("br", null), 
+        React.createElement("div", {style: {
+        display: this.state.openedTab === 0
+          ? 'inline'
+          : 'none'
+      }}, 
+        React.createElement(Table, {groupHeaderHeight: 30, headerHeight: 30, height: this.state.tableHeight, width: this.state.tableWidth, overflowX: controlledScrolling ? "hidden" : "auto", overflowY: controlledScrolling ? "hidden" : "auto", rowGetter: this.$TraceViewer_rowGetter.bind(this), rowHeight: 30, rowsCount: this.props.tableRowNumber, scrollLeft: this.props.left, scrollTop: this.props.top}, 
 
           listOfAtoms.map(function(x) {
             return (
@@ -54355,10 +54030,15 @@ Object.defineProperty(TraceViewer.prototype,"fastForward",{writable:true,configu
           ); })
 
         )
-
+        ), 
+        React.createElement("canvas", {style: {
+        display: this.state.openedTab === 1
+          ? 'inline'
+          : 'none'
+      }, width: "400", height: "400"})
 
       )
-
+      )
 
     );
   }});
@@ -54369,41 +54049,24 @@ TraceViewer.propTypes = {
   scenario: React.PropTypes.array,
   onContentDimensionsChange: React.PropTypes.func,
   left: React.PropTypes.number,
-  top: React.PropTypes.number
+  top: React.PropTypes.number,
+  tableRowNumber: React.PropTypes.number
 };
 
 TraceViewer.defaultProps = {
   listOfAtoms: [],
   scenario: [],
   tableWidth: 500,
-  tableHeight: 500
+  tableHeight: 500,
+  tableRowNumber: 5
 };
 module.exports = TraceViewer;
-
-// En JS, deux notations equivalentes :
-//    a.x
-//    a["x"]
-// Ca permet de faire
-//    a["coucou dorra"]
-// a.coucou dorra     /!\ marche pas
-
-// Pour chaque interface atomique contenue dans this.props.listOfAtoms
-
-//console.log(tab[0].x);
-/*    _.forEach(
-      this.props.listOfAtoms,
-      function(x){
-        res[x.name] = tab[0].x ;/*  Recuperer la valeur de la cellule dans la index-ème cellule de this.props.scenario  */
-/*  }
-    )
-    return res[index];
-*/
 
 
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer,arguments[3],arguments[4],arguments[5],arguments[6],"/src/traceViewer.jsx","/src")
 
-},{"./scenario.js":259,"_process":8,"buffer":2,"fixed-data-table":61,"lodash":93,"react":255}]},{},[258])
+},{"./scenario.js":258,"_process":8,"buffer":2,"fixed-data-table":61,"lodash":93,"react":255}]},{},[257])
 
 
 //# sourceMappingURL=main.js.map

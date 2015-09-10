@@ -157,24 +157,25 @@ body {
 }
 div {
   vertical-align: middle;
-  height: 30%;
 }
 div.icons {
-  vertical-align: middle;
-  height: 7%;
-  background-color: #f7f7f7;
+  height: 200px;
+  background-color: #fffab2;
 }
-div.stat {
-  vertical-align: middle;
-  height: 20px;
-  width: 20px;
+.Tab.compiledInteraction {
+  text-align: left;
+  display: inline-block;
   background-color: #c8fffc;
-  margin-top: 1px;
-  margin-left: 250px;
+  height: 289px;
+  width: 100%;
+}
+div.codeEditor {
+  width: 100%;
+  height: 100%;
 }
 textarea {
   width: 100%;
-  height: 295px;
+  height: 289px;
   border: none;
   margin: 0;
   resize: none;
@@ -183,14 +184,10 @@ textarea {
   background-color: #c8fffc;
   font-size: 13pt;
 }
-textarea.statics {
-  height: 50px;
-  background-color: #74f4ff;
-}
 textarea.error {
   background-color: #ffbfbf;
 }
-textarea.errorScenario {
+div.errorScenario {
   width: 100%;
   height: 40px;
   border: none;
@@ -223,7 +220,7 @@ span {
   float: left;
   width: 50%;
   height: 100%;
-  background-color: #fffab2;
+  background-color: #fff45c;
   vertical-align: middle;
   text-align: center;
   display: table-cell;
@@ -257,40 +254,34 @@ span {
 .Tab:hover {
   background-color: #87abff;
 }
+.TabTraceViewer {
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  margin: 0;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 60px;
+}
+.TabTraceViewer.active {
+  background-color: #fffab2;
+}
+.TabTraceViewer:hover {
+  background-color: #f7c163;
+}
 .TabContent {
   float: left;
   width: 100%;
   height: calc(100% - 60px);
 }
-.button {
-  position: relative;
-  top: -43px;
-  left: 410px;
+.TabContentTraceViewer {
+  float: left;
+  width: 100%;
+  height: calc(100% - 60px);
+  background-color: #fffab2;
 }
-button {
-  background: #fcfcfc;
-  background-image: -webkit-linear-gradient(top, #fcfcfc, #e3e5e6);
-  background-image: -moz-linear-gradient(top, #fcfcfc, #e3e5e6);
-  background-image: -ms-linear-gradient(top, #fcfcfc, #e3e5e6);
-  background-image: -o-linear-gradient(top, #fcfcfc, #e3e5e6);
-  background-image: linear-gradient(to bottom, #fcfcfc, #e3e5e6);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  font-family: Arial;
-  color: #10e6bb;
-  font-size: 15px;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-}
-button:hover {
-  background: #f5f5f5;
-  background-image: -webkit-linear-gradient(top, #f5f5f5, #b6b7b8);
-  background-image: -moz-linear-gradient(top, #f5f5f5, #b6b7b8);
-  background-image: -ms-linear-gradient(top, #f5f5f5, #b6b7b8);
-  background-image: -o-linear-gradient(top, #f5f5f5, #b6b7b8);
-  background-image: linear-gradient(to bottom, #f5f5f5, #b6b7b8);
-  text-decoration: none;
+canavas {
+  background-color: #fff;
 }
 
 /*# sourceMappingURL=main.css.map */
