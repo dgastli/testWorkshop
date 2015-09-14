@@ -53904,7 +53904,6 @@ var Table = FixedDataTable.Table;
 var rowNumber=5;
 var scenarioUtils=require('./scenario.js');
 
-
 var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____Class2.hasOwnProperty(____Class2____Key)){TraceViewer[____Class2____Key]=____Class2[____Class2____Key];}}var ____SuperProtoOf____Class2=____Class2===null?null:____Class2.prototype;TraceViewer.prototype=Object.create(____SuperProtoOf____Class2);TraceViewer.prototype.constructor=TraceViewer;TraceViewer.__superConstructor__=____Class2;
 
   function TraceViewer(props) {"use strict";
@@ -53912,10 +53911,42 @@ var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____C
     this.state = {
       tableWidth: this.props.tableWidth,
       tableHeight: this.props.tableHeight,
-      openedTab: 0
+      openedTab: 0,
+      mainInterfaceState:{time:0,mouse: {
+            buttons: 0,
+            position: {
+                x: 0,
+                y: 0
+            },
+            wheel: {
+                x: 0,
+                y: 0,
+                z: 0
+            }
+        }}
     };
 
   }
+
+  Object.defineProperty(TraceViewer.prototype,"mouse",{writable:true,configurable:true,value:function(e) {"use strict";
+      var target = e.target;
+      var rect = React.findDOMNode(this.refs.iiicanvas).getBoundingClientRect();
+      var offsetX = e.clientX - rect.left;
+      var offsetY = e.clientY - rect.top;
+      this.setState({mainInterfaceState:{time:e.timeStamp,mouse : {
+          buttons: e.buttons,
+          position: {
+              x: offsetX,
+              y: offsetY
+          },
+          wheel: {
+              x: (e.deltaX !== undefined && e.deltaX !== null) ? e.deltaX : 0,
+              y: (e.deltaY !== undefined && e.deltaY !== null) ? e.deltaY : 0,
+              z: (e.deltaZ !== undefined && e.deltaZ !== null) ? e.deltaZ : 0
+          }
+      }}});
+      console.log("ok  "  + JSON.stringify(this.state));
+  }});
 
   Object.defineProperty(TraceViewer.prototype,"componentDidMount",{writable:true,configurable:true,value:function() {"use strict";
     this.$TraceViewer_updateSize();
@@ -53927,6 +53958,61 @@ var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____C
     } else {
       win.onresize = this.$TraceViewer_onResize.bind(this);
     }
+
+    ///////////////////////////////////////////////////////////
+    // DEBUT  CODE iii Canvas
+
+    var iiicanvas = React.findDOMNode(this.refs.iiicanvas);
+
+    // Prevent context menu
+    iiicanvas.addEventListener("contextmenu", function(e) {
+      if (e.preventDefault !== undefined)
+          e.preventDefault();
+      if (e.stopPropagation !== undefined)
+          e.stopPropagation();
+      return false;
+    }, false);
+
+    // Mouse events
+    iiicanvas.addEventListener("mousemove", this.mouse.bind(this), false);
+    iiicanvas.addEventListener("mousedown", this.mouse.bind(this), false);
+    iiicanvas.addEventListener("mouseup", this.mouse.bind(this), false);
+    iiicanvas.addEventListener("wheel", this.mouse.bind(this), false);
+
+    // // Global
+    // window.addEventListener("resize", resize, false);
+
+    // // Keyboard events
+    // iiicanvas.addEventListener("keydown", keydown, false);
+    // iiicanvas.addEventListener("keyup", keyup, false);
+
+
+    //
+    // // Touch events
+    // iiicanvas.addEventListener("touchcancel", touch, false);
+    // iiicanvas.addEventListener("touchend", touch, false);
+    // iiicanvas.addEventListener("touchmove", touch, false);
+    // iiicanvas.addEventListener("touchstart", touch, false);
+    //
+    // // Device
+    // // window.addEventListener("devicemotion", devicemotion, false);
+    // window.addEventListener("deviceorientation", deviceorientation, false);
+    // window.addEventListener("devicelight", devicelight, false);
+    // window.addEventListener("deviceproximity", deviceproximity, false);
+    //
+    // window.setInterval(function(){
+    //   mainInterface.time = Date.now();
+    //   timeStep();
+    // }, 1000/60);
+
+
+    // FIN  CODE iii Canvas
+    ///////////////////////////////////////////////////////////
+
+
+
+
+
   }});
 
 
@@ -54031,7 +54117,7 @@ var ____Class2=React.Component;for(var ____Class2____Key in ____Class2){if(____C
 
         )
         ), 
-        React.createElement("canvas", {style: {
+        React.createElement("canvas", {ref: "iiicanvas", style: {
         display: this.state.openedTab === 1
           ? 'inline'
           : 'none'
